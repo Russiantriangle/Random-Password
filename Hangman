@@ -1,0 +1,113 @@
+import random
+#Art fpr printing
+stages = ['''
+  +---+
+  |   |
+  O   |
+ /|\  |
+ / \  |
+      |
+=========
+''', '''
+  +---+
+  |   |
+  O   |
+ /|\  |
+ /    |
+      |
+=========
+''', '''
+  +---+
+  |   |
+  O   |
+ /|\  |
+      |
+      |
+=========
+''', '''
+  +---+
+  |   |
+  O   |
+ /|   |
+      |
+      |
+=========''', '''
+  +---+
+  |   |
+  O   |
+  |   |
+      |
+      |
+=========
+''', '''
+  +---+
+  |   |
+  O   |
+      |
+      |
+      |
+=========
+''', '''
+  +---+
+  |   |
+      |
+      |
+      |
+      |
+=========
+''']
+
+#Created Variables
+
+#Variable for while loop to end the game
+end_of_game = False
+
+# Random words
+word_list = ["ardvark", "baboon", "camel"]
+
+#Choosing random Words
+chosen_word = random.choice(word_list)
+
+#Lenght of Random Words
+word_length = len(chosen_word)
+
+# Lives in a game
+lives = 6
+
+#Creating a sting of blanks
+string_display = ""
+for char in range(word_length):
+    string_display = string_display + "_"
+
+#Converting a string of Blanks to the list
+display = list(string_display)
+
+# While loop for determining if the game is over or not
+while end_of_game != True:
+
+    # Input users Guess
+    guess = input("Guess a letter: ").lower()
+
+    #Checking if the guess is correct
+    for position in range(word_length):
+        letter = chosen_word[position]
+        if letter == guess:
+            display[position] = letter
+
+    # If the guess is not correct then reduce lives
+    if guess not in chosen_word:
+        lives -= 1
+        if lives == 0:
+            end_of_game = True
+            print("You lose.")
+
+    #if no blank left and lives are still more than zero then user wins
+    elif "_" not in display:
+        end_of_game = True
+        print("You win.")
+
+    #print a nice string of characters and blanks for the user
+    print(f"{' '.join(display)}")
+
+    #Print Art 
+    print(stages[lives])
